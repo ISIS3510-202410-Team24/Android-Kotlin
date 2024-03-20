@@ -8,9 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import app.features.login.ui.SignInScreenApp
+import com.example.orderingfoodapp.ui.login.ui.LoginScreen
 import com.example.orderingfoodapp.ui.theme.OrderingFoodAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SignInScreenApp()
+                    LoginScreen()
                 }
             }
         }
@@ -34,6 +33,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     OrderingFoodAppTheme {
-        SignInScreenApp()
+        LoginScreen()
     }
 }
