@@ -1,19 +1,4 @@
 # Welcome to our project
 We're using this scaffolding for the ordering food app:
-app/
-├── features/
-│   ├── feature1/
-│   │   ├── data/
-│   │   ├── domain/
-│   │   ├── presentation/
-│   │   └── ui/
-│   ├── feature2/
-│   │   ├── data/
-│   │   ├── domain/
-│   │   ├── presentation/
-│   │   └── ui/
-└── common/
-    ├── data/
-    ├── domain/
-    ├── presentation/
-    └── ui/
+
+![scaffolding](https://github.com/ISIS3510-202410-Team24/Android-Kotlin/assets/80436377/91ed5bf7-8a6c-409e-bc4a-329528b62ad4)
