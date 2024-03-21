@@ -9,33 +9,35 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.orderingfoodapp.ui.home.domain.AppNavigation
-import com.example.orderingfoodapp.ui.login.ui.LoginScreen
-import com.example.orderingfoodapp.ui.theme.OrderingFoodAppTheme
+import com.example.orderingfoodapp.screens.login.ui.LoginScreen
+import com.example.orderingfoodapp.screens.theme.OrderingFoodAppTheme
+import com.google.firebase.BuildConfig
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
+import com.google.firebase.auth.auth
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        configureFirebaseServices()
         setContent {
             OrderingFoodAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-//                    LoginScreen()
-                    AppNavigation()
+                    LoginScreen()
                 }
             }
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     OrderingFoodAppTheme {
-        AppNavigation()
-//        LoginScreen()
+        LoginScreen()
     }
 }
+

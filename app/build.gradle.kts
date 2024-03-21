@@ -1,6 +1,10 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    // Add the Google services Gradle plugin
+    id("com.google.gms.google-services") version "4.4.1" apply false
+    id("com.google.dagger.hilt.android") version "2.44" apply false
 }
 
 android {
@@ -67,6 +71,19 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // icons
     implementation("androidx.compose.material:material-icons-extended-android:1.6.4")
+
+    // navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    // firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore:24.11.0")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.49")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 }
