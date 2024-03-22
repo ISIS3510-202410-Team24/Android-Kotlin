@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:834956701513:android:7acb5b838bcc4eccc0f498",
         "android_client_info": {
-          "package_name": "com.moviles.RestaurantsApp"
+          "package_name": "com.example.orderingfoodapp"
         }
       },
       "oauth_client": [],
