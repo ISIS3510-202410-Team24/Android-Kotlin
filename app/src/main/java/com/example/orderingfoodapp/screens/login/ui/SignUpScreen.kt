@@ -20,20 +20,30 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.orderingfoodapp.R
+import com.example.orderingfoodapp.screens.login.data.SignInViewModel
 import com.example.orderingfoodapp.screens.login.data.SignUpViewModel
 
 @Composable
-fun SignUpScreen() {
-    val usernameState = remember { mutableStateOf("") }
-    val emailState = remember { mutableStateOf("") }
-    val passwordState = remember { mutableStateOf("") }
+fun SignUpScreen(
+    openAndPopUp: (String, String) -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: SignUpViewModel = viewModel()
+) {
+//    val usernameState = remember { mutableStateOf("") }
+//    val emailState = remember { mutableStateOf("") }
+//    val passwordState = remember { mutableStateOf("") }
+
+    val username = viewModel.username.collectAsState()
+    val email = viewModel.email.collectAsState()
+    val password = viewModel.password.collectAsState()
 
     Column {
 
         TextField(
-            value = usernameState.value,
-            onValueChange = { usernameState.value = it },
+            value = username.value,
+            onValueChange = { viewModel.updateUsername(it) },
             label = { Text("Username") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
             singleLine = true,
@@ -50,8 +60,8 @@ fun SignUpScreen() {
         )
 
         TextField(
-            value = emailState.value,
-            onValueChange = { emailState.value = it },
+            value = email.value,
+            onValueChange = { viewModel.updateEmail(it) },
             label = { Text("Email") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
             singleLine = true,
@@ -68,8 +78,8 @@ fun SignUpScreen() {
         )
 
         TextField(
-            value = passwordState.value,
-            onValueChange = { passwordState.value = it },
+            value = password.value,
+            onValueChange = { viewModel.updatePassword(it) },
             label = { Text("Password") },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Send),
@@ -87,7 +97,7 @@ fun SignUpScreen() {
         )
 
         Button(
-            onClick = { /* Do Something */ },
+            onClick = { viewModel.onSignUpClick(openAndPopUp) },
             modifier = Modifier
                 .padding(top = 16.dp)
                 .fillMaxWidth()

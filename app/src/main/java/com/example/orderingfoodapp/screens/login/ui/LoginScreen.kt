@@ -108,8 +108,8 @@ fun TabOptions() {
                 modifier = Modifier.fillMaxSize()
             ) {
                 when (index) {
-                    0 -> SignInScreen()
-                    1 -> SignUpScreen()
+                    0 -> SignInScreen({ _, _ -> })
+                    1 -> SignUpScreen({ _, _ -> })
                 }
             }
         }

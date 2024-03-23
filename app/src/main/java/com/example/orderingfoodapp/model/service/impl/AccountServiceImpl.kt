@@ -15,9 +15,9 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.tasks.await
 
-class AccountServiceImpl @Inject constructor(): AccountService {
+class AccountServiceImpl  {
 
-    override val currentUser: Flow<User?>
+    val currentUser: Flow<User?>
         get() = callbackFlow {
             val listener =
                 FirebaseAuth.AuthStateListener { auth ->
@@ -26,10 +26,10 @@ class AccountServiceImpl @Inject constructor(): AccountService {
             Firebase.auth.addAuthStateListener(listener)
             awaitClose { Firebase.auth.removeAuthStateListener(listener) }
         }
-    override val currentUserId: String
+    val currentUserId: String
         get() = Firebase.auth.currentUser?.uid.orEmpty()
 
-    override fun hasUser(): Boolean {
+    fun hasUser(): Boolean {
         return Firebase.auth.currentUser != null
     }
 
@@ -37,11 +37,11 @@ class AccountServiceImpl @Inject constructor(): AccountService {
 //        return Firebase.auth.currentUser.toNotesUser()
 //    }
 
-    override suspend fun createAnonymousAccount() {
+    suspend fun createAnonymousAccount() {
         Firebase.auth.signInAnonymously().await()
     }
 
-    override suspend fun updateDisplayName(newDisplayName: String) {
+    suspend fun updateDisplayName(newDisplayName: String) {
         val profileUpdates = userProfileChangeRequest {
             displayName = newDisplayName
         }
@@ -49,24 +49,24 @@ class AccountServiceImpl @Inject constructor(): AccountService {
         Firebase.auth.currentUser!!.updateProfile(profileUpdates).await()
     }
 
-    override suspend fun linkAccount(email: String, password: String) {
+    suspend fun linkAccount(email: String, password: String) {
         val credential = EmailAuthProvider.getCredential(email, password)
         Firebase.auth.currentUser!!.linkWithCredential(credential).await()
     }
-    override suspend fun signIn(email: String, password: String) {
-        val user = Firebase.auth.signInWithEmailAndPassword(email, password).await()
+    suspend fun signIn(email: String, password: String) {
+        Firebase.auth.signInWithEmailAndPassword(email, password).await()
     }
 
-    override suspend fun signUp(email: String, password: String) {
+    suspend fun signUp(email: String, password: String) {
         Firebase.auth.createUserWithEmailAndPassword(email, password).await()
     }
 
-    override suspend fun signOut() {
+    suspend fun signOut() {
         Firebase.auth.signOut()
         createAnonymousAccount()
     }
 
-    override suspend fun deleteAccount() {
+    suspend fun deleteAccount() {
         Firebase.auth.currentUser!!.delete().await()
     }
 }

@@ -16,6 +16,6 @@ open class FoodAppViewModel: ViewModel() {
         )
 
     companion object {
-        const val ERROR_TAG = "NOTES APP ERROR"
+        const val ERROR_TAG = "FOOD APP ERROR"
     }
 }

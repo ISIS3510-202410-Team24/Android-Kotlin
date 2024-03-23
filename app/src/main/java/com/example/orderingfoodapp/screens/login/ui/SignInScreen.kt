@@ -20,8 +20,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,18 +30,27 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.orderingfoodapp.R
+import com.example.orderingfoodapp.screens.login.data.SignInViewModel
 
 @Composable
-fun SignInScreen() {
+fun SignInScreen(
+    openAndPopUp: (String, String) -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: SignInViewModel = viewModel()
+) {
     // Inputs para correo y contraseña
-    val emailState = remember { mutableStateOf("") }
-    val passwordState = remember { mutableStateOf("") }
+    // val emailState = remember { mutableStateOf("") }
+    // val passwordState = remember { mutableStateOf("") }
+
+    val email = viewModel.email.collectAsState()
+    val password = viewModel.password.collectAsState()
 
     Column {
         TextField(
-            value = emailState.value,
-            onValueChange = { emailState.value = it },
+            value = email.value,
+            onValueChange = { viewModel.updateEmail(it) },
             label = { Text("Email") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
             singleLine = true,
@@ -59,8 +67,8 @@ fun SignInScreen() {
         )
 
         TextField(
-            value = passwordState.value,
-            onValueChange = { passwordState.value = it },
+            value = password.value,
+            onValueChange = { viewModel.updatePassword(it) },
             label = { Text("Password") },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Send),
@@ -78,7 +86,7 @@ fun SignInScreen() {
         )
 
         Button(
-            onClick = { /* Do Something */ },
+            onClick = { viewModel.onSignInClick(openAndPopUp) },
             modifier = Modifier
                 .padding(top = 16.dp)
                 .fillMaxWidth()

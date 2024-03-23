@@ -7,9 +7,6 @@ plugins {
     id("com.google.firebase.firebase-perf")
     id("com.google.firebase.crashlytics")
 
-
-
-    id("com.google.dagger.hilt.android") version "2.44" apply false
 }
 
 android {
@@ -96,4 +93,5 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:2.51")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
 }
