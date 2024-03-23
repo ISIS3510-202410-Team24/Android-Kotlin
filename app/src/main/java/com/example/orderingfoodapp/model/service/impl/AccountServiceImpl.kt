@@ -54,7 +54,7 @@ class AccountServiceImpl @Inject constructor(): AccountService {
         Firebase.auth.currentUser!!.linkWithCredential(credential).await()
     }
     override suspend fun signIn(email: String, password: String) {
-        Firebase.auth.signInWithEmailAndPassword(email, password).await()
+        val user = Firebase.auth.signInWithEmailAndPassword(email, password).await()
     }
 
     override suspend fun signUp(email: String, password: String) {
