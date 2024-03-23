@@ -31,7 +31,7 @@ fun FoodApp() {
             val appState = rememberAppState()
             Scaffold {innerPaddingModifier ->
                 NavHost(
-                    navController = appState.navController as NavHostController,
+                    navController = appState.navController,
                     startDestination = LOGIN_SCREEN,
                     modifier = Modifier.padding(innerPaddingModifier)
                 ) {
